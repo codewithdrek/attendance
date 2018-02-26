@@ -19,7 +19,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String token = (String) request.getSession().getAttribute("token");
+		String token = (String) request.getHeader("token");
 		UserToken userToken = userTokenRepository.findOne(Long.parseLong(token));
 		if(userToken != null) {
 			return true;
