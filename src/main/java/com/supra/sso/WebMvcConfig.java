@@ -10,7 +10,7 @@ import com.supra.sso.utiities.RequestInterceptor;
 
 
 @Configuration
-public class WebSecurityConfig extends WebMvcConfigurerAdapter {
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private RequestInterceptor requestInterceptor;
 
