@@ -4,6 +4,7 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,14 +48,16 @@ public class RequestInterceptor extends HandlerInterceptorAdapter{
 				//add userobject in request or session and autologin
 				if(user != null) {
 					securityService.autologin(user.getUsername(), user.getPassword());
-					request.getSession().setAttribute("loggedInUser", user);
+					HttpSession httpSession = request.getSession();
+					httpSession.setAttribute("loggedInUser", user);
+					httpSession.setAttribute("token", token);
 				}
 				
 				//send the request further
 				return true;
 			}
 			else {
-				return false;
+				return true;
 			}
 		}
 		else {

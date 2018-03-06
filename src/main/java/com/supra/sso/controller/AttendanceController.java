@@ -1,6 +1,7 @@
 package com.supra.sso.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,13 +15,16 @@ import com.supra.sso.model.User;
 public class AttendanceController {
 	
 	/*8082/attendance/welcomeattendance*/
-    @RequestMapping(value={"/", "/welcomeattendance"})
-    public String openPageForModule(Model m, HttpServletRequest request) {
+    @RequestMapping(value="/welcomeattendance")
+    public String openPageForModule(Model m, HttpServletRequest request, HttpSession httpSession) {
     	if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof UserDetails) {
     		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    		m.addAttribute("username", user.getUsername());
-    		String roleName = user.getRoles().iterator().next().getAuthority();
-    		m.addAttribute("role", roleName);
+			m.addAttribute("username", user.getUsername());
+			
+			String roleName = user.getRoles().iterator().next().getAuthority();
+			m.addAttribute("role", roleName);
+			
+			m.addAttribute("token", httpSession.getAttribute("token"));
     		return "welcomeattendance";
     	}
     	else {

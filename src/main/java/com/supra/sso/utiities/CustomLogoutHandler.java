@@ -27,21 +27,22 @@ public class CustomLogoutHandler implements LogoutHandler{
 			token = request.getParameter(paramName); 
 		}
 		
-		
-		
 		if(token != null) {
 			UserToken userToken = userTokenRepository.findByToken(token);
 			if(userToken != null) {
-				
 				//delete token
 				userTokenRepository.delete(userToken.getId());
-				request.getSession().invalidate();
-				try {
-					response.sendRedirect("login?logout");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
+		}
+		//invalidate session
+		authentication = null;
+		request.getSession().invalidate();
+		
+		//redirect to logout of single sign on
+		try {
+			response.sendRedirect("http://localhost:8080/sso/login?logout");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
