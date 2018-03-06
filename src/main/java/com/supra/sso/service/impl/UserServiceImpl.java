@@ -1,6 +1,6 @@
 package com.supra.sso.service.impl;
 
-/*import java.util.HashSet;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,12 +10,12 @@ import com.supra.sso.model.User;
 import com.supra.sso.repository.ModuleRepository;
 import com.supra.sso.repository.RoleRepository;
 import com.supra.sso.repository.UserRepository;
-import com.supra.sso.service.UserService;*/
+import com.supra.sso.service.UserService;
 
-//@Service
-public class UserServiceImpl/* implements UserService*/ {
+@Service
+public class UserServiceImpl implements UserService {
     
-/*	@Autowired
+	@Autowired
     private UserRepository userRepository;
     
     @Autowired
@@ -41,5 +41,5 @@ public class UserServiceImpl/* implements UserService*/ {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
-    }*/
+    }
 }
